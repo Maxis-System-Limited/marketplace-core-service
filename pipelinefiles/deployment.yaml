@@ -1,0 +1,47 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: elogistic-core-service
+  name: elogistic-core-service
+  namespace: elogistic-core-service
+spec:
+  replicas: 1
+  selector:
+
+    app: elogistic-core-service
+    deploymentconfig: elogistic-core-service
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: elogistic-core-service
+        deploymentconfig: elogistic-core-service
+    spec:
+      containers:
+        - image: docker-registry.default.svc:5000/elogistic-core-service/elogistic-core-service
+          imagePullPolicy: Always
+          name: elogistic-core-service
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - elogistic-core-service
+        from:
+          kind: ImageStreamTag
+          name: 'elogistic-core-service:latest'
+          namespace: elogistic-core-service
+      type: ImageChange

@@ -1,0 +1,41 @@
+pipeline{
+  agent { label 'maven' }
+  stages{
+    stage ('Checkout'){
+      steps{
+        checkout scm
+      }
+  }
+    stage ('Unit Test') {
+      steps{
+      echo 'Unit Test completed.'   
+      }
+    }
+    
+   stage ('Static Analysis') {       
+     steps{      
+       echo 'Static analysis completed.'
+    }
+  }
+    stage ('Build') {
+      steps{
+      sh "mvn  install -DskipTests"       
+      }
+    }
+    stage ('Build Image') {
+      steps{
+      sh '''
+          oc start-build elogistic-core-service-build --from-dir=. --follow
+        '''
+      }
+    }    
+   
+    stage ('Integration Test') {       
+     steps{      
+       echo 'Integration test completed.'
+    }
+  }
+    
+    
+  }
+}
