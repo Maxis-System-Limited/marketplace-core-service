@@ -25,7 +25,7 @@ pipeline{
     stage ('Build Image') {
       steps{
       sh '''
-          oc start-build elogistic-core-service-build --from-dir=. --follow
+          oc start-build marketplace-core-service-build --from-dir=. --follow
         '''
       }
     }    

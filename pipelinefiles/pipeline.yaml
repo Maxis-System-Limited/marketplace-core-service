@@ -1,14 +1,14 @@
 kind: "BuildConfig"
 apiVersion: "v1"
 metadata:
-  name: "elogistic-core-service-pipeline"
+  name: "marketplace-core-service-pipeline"
 spec:
   source:
     git:
       ref: main
-      uri: 'https://github.com/Maxis-System-Limited/elogistic-core-service'
+      uri: 'https://github.com/Maxis-System-Limited/marketplace-core-service'
     sourceSecret:
-      name: elogistic-core-service-secret
+      name: marketplace-core-service-secret
     type: Git
   strategy:
     jenkinsPipelineStrategy:

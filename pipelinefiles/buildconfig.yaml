@@ -2,16 +2,16 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    build: elogistic-core-service-build
-  name: elogistic-core-service-build
-  namespace: elogistic-core-service
+    build: marketplace-core-service-build
+  name: marketplace-core-service-build
+  namespace: marketplace-core-service
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: 'elogistic-core-service:latest'
+      name: 'marketplace-core-service:latest'
   postCommit: {}
   resources: {}
   runPolicy: Serial

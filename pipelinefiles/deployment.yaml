@@ -2,15 +2,15 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: elogistic-core-service
-  name: elogistic-core-service
-  namespace: elogistic-core-service
+    app: marketplace-core-service
+  name: marketplace-core-service
+  namespace: marketplace-core-service
 spec:
   replicas: 1
   selector:
 
-    app: elogistic-core-service
-    deploymentconfig: elogistic-core-service
+    app: marketplace-core-service
+    deploymentconfig: marketplace-core-service
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
@@ -19,13 +19,13 @@ spec:
   template:
     metadata:
       labels:
-        app: elogistic-core-service
-        deploymentconfig: elogistic-core-service
+        app: marketplace-core-service
+        deploymentconfig: marketplace-core-service
     spec:
       containers:
-        - image: docker-registry.default.svc:5000/elogistic-core-service/elogistic-core-service
+        - image: docker-registry.default.svc:5000/marketplace-core-service/marketplace-core-service
           imagePullPolicy: Always
-          name: elogistic-core-service
+          name: marketplace-core-service
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -39,9 +39,9 @@ spec:
     - imageChangeParams:
         automatic: true
         containerNames:
-          - elogistic-core-service
+          - marketplace-core-service
         from:
           kind: ImageStreamTag
-          name: 'elogistic-core-service:latest'
-          namespace: elogistic-core-service
+          name: 'marketplace-core-service:latest'
+          namespace: marketplace-core-service
       type: ImageChange
